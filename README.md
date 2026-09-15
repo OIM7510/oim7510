@@ -3,3 +3,4 @@ Course work for OIM7510
 
 - Name: Zhi Li (zli@babosn.edu)
 - Course Time: Tuesday 6:30pm - 9pm
+- Classroom: Horn 148
