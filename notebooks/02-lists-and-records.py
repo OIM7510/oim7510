@@ -415,7 +415,7 @@ def _(statuses):
     for status in statuses:
         # print(status)
         if status == 'shipped':
-            n_shipped += 1
+            n_shipped += 1 # same as n_shipped = n_shipped + 1
         else:
             n_not_shipped += 1
 
