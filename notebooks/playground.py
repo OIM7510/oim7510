@@ -13,6 +13,68 @@ def _():
 
 @app.cell
 def _():
+    for charge in [10, 20, 30]:
+        total = 0
+        total = total + charge
+
+    total
+    return
+
+
+@app.cell
+def _():
+    max(["9.50", "16.75", "22.25"])
+    return
+
+
+@app.cell
+def _():
+    order_lines = ["notebook", "pen"]
+    len(order_lines)
+    return (order_lines,)
+
+
+@app.cell
+def _(order_lines):
+    order_lines.extend(["stapler", "tape"])
+    order_lines
+    return
+
+
+@app.cell
+def _():
+    s1 = 'Hi'
+    s2 = 'Hi\n'
+    s3 = 'Hi\t!'
+    return s1, s2, s3
+
+
+@app.cell
+def _(s1):
+    print(s1)
+    return
+
+
+@app.cell
+def _(s2):
+    print(s2)
+    return
+
+
+@app.cell
+def _(s3):
+    print(s3)
+    return
+
+
+@app.cell
+def _(s1, s2, s3):
+    len(s1), len(s2), len(s3)
+    return
+
+
+@app.cell
+def _():
     charges = [10, 20, 30]
     return (charges,)
 
