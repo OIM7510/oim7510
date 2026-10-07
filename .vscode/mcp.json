@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "oim7510": {
+      "type": "http",
+      "url": "https://oim-mcp.zhili.dev/oim7510/mcp"
+    }
+  }
+}

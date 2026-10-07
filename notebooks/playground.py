@@ -13,6 +13,82 @@ def _():
 
 @app.cell
 def _():
+    # Review Session 5
+    orders = [
+        {"OrderID": 10248, "ShipCountry": "France"},
+        {"OrderID": 10249, "ShipCountry": "Germany"},
+        {"OrderID": 10250, "ShipCountry": "France"},
+        {"OrderID": 10248, "ShipCountry": "France"},
+        {"OrderID": 10249, "ShipCountry": "Germany"},
+        {"OrderID": 10250, "ShipCountry": "USA"},
+        {"OrderID": 10248, "ShipCountry": "France"},
+        {"OrderID": 10249, "ShipCountry": "China"},
+        {"OrderID": 10250, "ShipCountry": "France"},
+        {"OrderID": 10248, "ShipCountry": "France"},
+        {"OrderID": 10249, "ShipCountry": "Germany"},
+        {"OrderID": 10250, "ShipCountry": "France"},
+    ]
+    orders[1]
+    return (orders,)
+
+
+@app.cell
+def _(orders):
+    countries = []
+
+    for order in orders:
+        country = order['ShipCountry']
+        countries.append(country)
+
+    len(set(countries)), set(countries)
+    return
+
+
+@app.cell
+def _():
+    json = [
+        {
+            "name": "OpenAI",
+            "vendor": "openai",
+            "apiKey": "${input:chat.lm.secret.7a201382}"
+        },
+        {
+            "name": "Babson AI",
+            "vendor": "customendpoint",
+            "apiKey": "${input:chat.lm.secret.-23df36c}",
+            "apiType": "messages",
+            "models": [
+                {
+                    "id": "claude-sonnet-5",
+                    "name": "Sonnet 5 (Babson)",
+                    "url": "https://ca-litellm-mint-eus2.orangeflower-5d81efa8.eastus2.azurecontainerapps.io/v1/messages",
+                    "maxInputTokens": 200000,
+                    "maxOutputTokens": 32000
+                }
+            ]
+        }
+    ]
+    json[1]['models'][0]['name']
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
     for charge in [10, 20, 30]:
         total = 0
         total = total + charge

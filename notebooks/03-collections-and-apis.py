@@ -11,7 +11,7 @@
 import marimo
 
 __generated_with = "0.24.2"
-app = marimo.App(layout_file="layouts/03-collections-and-apis.slides.json", width="medium", sql_output="polars")
+app = marimo.App(width="medium", sql_output="polars")
 
 
 @app.cell
@@ -191,7 +191,7 @@ def _(mo):
 def _():
     closing_prices = {"AAPL": 260.81, "NVDA": 186.00, "MSFT": 404.88, "GOOG": 308.42}
     closing_prices
-    return (closing_prices,)
+    return
 
 
 @app.cell(hide_code=True)
@@ -218,7 +218,7 @@ def _():
         "Finland", "USA", "USA", "Germany", "France", "Austria", "Argentina", "Venezuela",
     ]
     len(ship_countries)
-    return (ship_countries,)
+    return
 
 
 @app.cell(hide_code=True)
@@ -419,6 +419,17 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+    1.  list
+    2.  set
+    3.  dict
+    4.  tuple
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
     ## ✏️ D · The portfolio again
 
     Notebook 2 held the six holdings as a list of dictionaries. Here they are as a list of tuples, one holding per tuple.
@@ -445,6 +456,24 @@ def _():
         ("TSLA", 150, 255.70),
     ]
     holdings
+    return (holdings,)
+
+
+@app.cell
+def _(holdings):
+    total_cost = 0
+    # use a for loop to iterate every stock to get the share and price of every stock, then calcuate the subtotal and add the subtotal to total_cost 
+    # for stock in holdings:
+    #     shares = stock[1]
+    #     price = stock[2]
+    #     subtotal = shares * price
+    #     total_cost += subtotal
+
+    for _symbol, _shares, _price in holdings:
+        subtotal = _shares * _price
+        total_cost += subtotal
+    total_cost
+
     return
 
 
@@ -514,6 +543,7 @@ def _(requests):
         "&temperature_unit=fahrenheit&wind_speed_unit=mph"
         "&timezone=America/New_York"
     )
+    print(babson_url)
     babson_reply = requests.get(babson_url, timeout=10)
     babson_reply.status_code
     return (babson_reply,)
@@ -545,6 +575,12 @@ def _(mo):
 @app.cell
 def _(babson_weather):
     babson_weather["current"]["temperature_2m"]
+    return
+
+
+@app.cell
+def _(babson_weather):
+    babson_weather["current"]["wind_speed_10m"]
     return
 
 

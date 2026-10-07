@@ -11,7 +11,11 @@
 import marimo
 
 __generated_with = "0.24.2"
-app = marimo.App(layout_file="layouts/04-functions-and-apis.slides.json", width="medium", sql_output="polars")
+app = marimo.App(
+    width="medium",
+    layout_file="layouts/04-functions-and-apis.slides.json",
+    sql_output="polars",
+)
 
 
 @app.cell
@@ -66,17 +70,19 @@ def _(mo):
     return
 
 
+@app.function
+def add_tax(amount):
+    return round(amount * 1.0625, 2)
+
+
 @app.cell
 def _():
-    def add_tax(amount):
-        return round(amount * 1.0625, 2)
+    weekend_sales = [100, 200, 150]
+    # add_tax(100)
+    for sale in weekend_sales:
+        print(add_tax(sale))
+        # print(round(amount * 1.0625, 2)) # calculting total after sales
 
-    return (add_tax,)
-
-
-@app.cell
-def _(add_tax):
-    add_tax(100)
     return
 
 
@@ -98,7 +104,7 @@ def _():
         ("NVDA", 20, 410.17),
         ("TSLA", 150, 255.70),
     ]
-    holdings
+    # holdings
     return (holdings,)
 
 
@@ -110,19 +116,16 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    def compute_cost(portfolio):
-        cost_so_far = 0
-        for symbol, shares, price in portfolio:
-            cost_so_far = cost_so_far + shares * price
-        return round(cost_so_far, 2)
-
-    return (compute_cost,)
+@app.function
+def compute_cost(portfolio):
+    cost_so_far = 0
+    for symbol, shares, price in portfolio:
+        cost_so_far = cost_so_far + shares * price
+    return round(cost_so_far, 2)
 
 
 @app.cell
-def _(holdings, compute_cost):
+def _(holdings):
     compute_cost(holdings)
     return
 
@@ -142,12 +145,12 @@ def _():
         ("BND", 300, 72.15),
         ("AAPL", 40, 173.93),
     ]
-    retirement_holdings
+    # retirement_holdings
     return (retirement_holdings,)
 
 
 @app.cell
-def _(compute_cost, retirement_holdings):
+def _(retirement_holdings):
     compute_cost(retirement_holdings)
     return
 
@@ -161,6 +164,40 @@ def _(mo):
     - **The name says what the work is for.** `compute_cost(retirement_holdings)` reads as a sentence; a loop has to be read line by line.
     - **Everything it needs comes in through the brackets.** So you can test it on a portfolio whose answer you already know, such as notebook 3's $116,302.70.
     """)
+    return
+
+
+@app.cell
+def _():
+    def calcuate_bmi(height, weight):
+        """
+        calcuate bmi values by height (in meters) and weight (in kg)
+        """
+        bmi = weight / (height ** 2)
+        return bmi
+
+    def check_bmi(bmi):
+        """
+        Determine BMI category based on value
+        """
+        if bmi >= 30:
+            category = "Obese"
+        elif bmi >= 25:
+            category = "Overweight"
+        elif bmi >= 18.5:
+            category = "Normal"
+        else:
+            category = "Underweight"
+        return category
+
+    def main():
+        height = float(input("Enter your height in meters: "))
+        weight = float(input("Enter your weight in kg: "))
+        bmi = calcuate_bmi(height, weight)
+        category = check_bmi(bmi)
+        print(f"Your BMI is {bmi:.2f}, which is classified as {category}.")
+
+    main()
     return
 
 
