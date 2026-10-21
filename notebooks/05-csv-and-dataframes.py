@@ -12,8 +12,12 @@
 
 import marimo
 
-__generated_with = "0.25.1"
-app = marimo.App(layout_file="layouts/05-csv-and-dataframes.slides.json", width="medium", sql_output="polars")
+__generated_with = "0.24.2"
+app = marimo.App(
+    width="medium",
+    layout_file="layouts/05-csv-and-dataframes.slides.json",
+    sql_output="polars",
+)
 
 
 @app.cell
@@ -199,6 +203,25 @@ def _(mo):
     return
 
 
+@app.cell
+def _(towns_from_file):
+    # 1
+
+    million_dollar_counts = {} # dictionary to store the counts
+
+    for town in towns_from_file:
+        if int(town['average_single_family_value_dollars']) >= 1000000:
+            county = town['county']
+            if county not in million_dollar_counts: # first time seeing this county
+                million_dollar_counts[county] = 0
+            million_dollar_counts[county] += 1
+            # try to use .get() 
+
+    million_dollar_counts
+
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
@@ -342,7 +365,7 @@ def _(mo, town_table):
         ORDER BY towns DESC
         """
     )
-    return (towns_over_threshold,)
+    return
 
 
 @app.cell(hide_code=True)

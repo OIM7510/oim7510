@@ -82,7 +82,6 @@ def _():
     for sale in weekend_sales:
         print(add_tax(sale))
         # print(round(amount * 1.0625, 2)) # calculting total after sales
-
     return
 
 
@@ -432,7 +431,7 @@ def _(requests):
 
 @app.cell
 def _(get_page):
-    get_page(1)["pagination"]
+    get_page(1)
     return
 
 
@@ -498,6 +497,19 @@ def _(mo):
 
     **Going further.** Post something more useful than one town's bill: choose a question somebody would ask, answer it from live data, and post the answer, in 140 characters or fewer.
     """)
+    return
+
+
+@app.cell
+def _(requests):
+    board_reply = requests.post(
+        "https://oim.zhili.dev/message",
+        headers={"x-token": "lzblack"},
+        json={"message": "Hi from Zhi"},
+        timeout=10,
+    )
+    board_reply.status_code, board_reply.json()
+
     return
 
 
