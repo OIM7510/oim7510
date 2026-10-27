@@ -185,3 +185,6 @@ cython_debug/
 # marimo
 #  Auto-generated notebook session/layout cache. Not source.
 __marimo__/
+
+# The TV show catalog, downloaded by notebooks/shows-db-demo.py from CS50; IMDb data, not ours to publish.
+data/shows.db
