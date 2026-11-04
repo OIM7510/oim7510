@@ -1,5 +1,7 @@
 # Design Practice: ERD
 
+> This is not the final solution or a well-designed ERD.
+
 ```mermaid
 erDiagram
     WRITERS ||--o{ WRITES : writes
