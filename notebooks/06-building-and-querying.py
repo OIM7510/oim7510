@@ -13,8 +13,12 @@
 
 import marimo
 
-__generated_with = "0.25.1"
-app = marimo.App(layout_file="layouts/06-building-and-querying.slides.json", width="medium", sql_output="polars")
+__generated_with = "0.24.2"
+app = marimo.App(
+    width="medium",
+    layout_file="layouts/06-building-and-querying.slides.json",
+    sql_output="polars",
+)
 
 
 @app.cell
@@ -100,7 +104,7 @@ def _(mo, pl, requests):
         town_rows = pl.DataFrame(_records).select(town_columns)
 
     county_rows.shape, town_rows.shape
-    return county_rows, town_rows
+    return
 
 
 @app.cell(hide_code=True)
@@ -130,7 +134,7 @@ def _(mo):
 
 
 @app.cell
-def _(county_rows, duckdb, mo, town_rows):
+def _(duckdb, mo):
     _file = mo.notebook_dir().parent / "data" / "ma-towns.duckdb"
     _file.parent.mkdir(exist_ok=True)
     _file.unlink(missing_ok=True)
@@ -194,6 +198,12 @@ def _(database, duckdb):
 @app.cell
 def _(ask):
     ask("SELECT (SELECT count(*) FROM counties) AS counties, (SELECT count(*) FROM towns) AS towns")
+    return
+
+
+@app.cell
+def _(ask):
+    ask("SELECT name, population FROM counties")
     return
 
 
@@ -267,11 +277,12 @@ def _(mo):
 @app.cell
 def _(ask):
     ask("""
-        SELECT name, population, average_single_family_bill_dollars
-        FROM towns
+        SELECT name, population, average_single_family_bill_dollars, county
+        FROM towns    
         WHERE county = 'Norfolk'
         ORDER BY average_single_family_bill_dollars DESC
         LIMIT 5
+
     """)
     return
 
@@ -395,7 +406,7 @@ def _(ask, mo, requests):
         _path.write_bytes(_reply.content)
     orders_file = _path.as_posix()
     ask(f"SELECT count(*) AS orders FROM '{orders_file}'")
-    return (orders_file,)
+    return
 
 
 @app.cell(hide_code=True)
